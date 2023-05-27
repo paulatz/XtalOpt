@@ -18,6 +18,7 @@
 #ifdef ENABLE_SSH
 
 #include <globalsearch/sshmanager.h>
+#include <QtWidgets>
 
 class QSemaphore;
 
