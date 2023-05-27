@@ -218,7 +218,7 @@ bool SlurmQueueInterface::startJob(Structure* s)
   QWriteLocker wlocker(&s->lock());
 
   QString command =
-    "cd \"" + s->getRempath() + "\" && " + m_submitCommand + " job.slurm";
+    "bash --login -c 'cd \"" + s->getRempath() + "\" && " + m_submitCommand + " job.slurm'";
 
   QString stdout_str;
   QString stderr_str;
@@ -503,7 +503,8 @@ QStringList SlurmQueueInterface::getQueueList() const
     return ret;
   }
 
-  QString command = m_statusCommand + " -u " + m_opt->username;
+  // LP QString command = m_statusCommand + " -u " + m_opt->username;
+  QString command = "bash --login -c '" + m_statusCommand + " -u " + m_opt->username + "'";
 
   // Execute
   QString stdout_str;
